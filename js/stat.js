@@ -1,3 +1,5 @@
+'use strict';
+
 var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
 var CLOUD_X = 100;
@@ -12,7 +14,7 @@ var PLAYERS_Y = CLOUD_HEIGHT + CLOUD_Y - GAP - TEXT_HEIGHT;
 var GIST_HEIGHT = -150;
 var columnHeight = GIST_HEIGHT + (TEXT_HEIGHT * 2);
 
-var renderCloud = function(ctx, x, y, color) {
+var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
@@ -38,7 +40,7 @@ var getColorColumn = function (color) {
 };
 */
 
-window.renderStatistics = function(ctx, names, times) {
+window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, 110, 20, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, 100, 10, '#fff');
 
@@ -54,8 +56,8 @@ window.renderStatistics = function(ctx, names, times) {
   for (var i = 0; i < names.length; i++) {
     ctx.fillStyle = '#000';
     ctx.fillText(names[i], CLOUD_X + COLUMN_WIDTH + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, PLAYERS_Y);
-    ctx.fillRect(CLOUD_X + COLUMN_WIDTH + (COLUMN_WIDTH + COLUMN_DISTANCE)* i, COLUMN_Y, COLUMN_WIDTH, (columnHeight * times[i]) / maxTime);
-    //getColorColumn(names); не знаю каким образом менять цвета колонок
-    ctx.fillText( Math.ceil(times[i]), CLOUD_X + COLUMN_WIDTH + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, COLUMN_Y + (columnHeight * times[i]) / maxTime - TEXT_HEIGHT - LINE_HEIGHT);
+    ctx.fillRect(CLOUD_X + COLUMN_WIDTH + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, COLUMN_Y, COLUMN_WIDTH, (columnHeight * times[i]) / maxTime);
+    // getColorColumn(names); не знаю каким образом менять цвета колонок
+    ctx.fillText(Math.ceil(times[i]), CLOUD_X + COLUMN_WIDTH + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, COLUMN_Y + (columnHeight * times[i]) / maxTime - TEXT_HEIGHT - LINE_HEIGHT);
   }
 };
