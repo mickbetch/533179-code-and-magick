@@ -12,7 +12,11 @@ var COLUMN_DISTANCE = 50;
 var COLUMN_Y = CLOUD_HEIGHT + CLOUD_Y - GAP - TEXT_HEIGHT - LINE_HEIGHT;
 var PLAYERS_Y = CLOUD_HEIGHT + CLOUD_Y - GAP - TEXT_HEIGHT;
 var GIST_HEIGHT = -150;
-var columnHeight = GIST_HEIGHT + (TEXT_HEIGHT * 2);
+var COLUMN_HEIGHT = GIST_HEIGHT + (TEXT_HEIGHT * 2);
+var CLOUD_COLOR = '#fff';
+var SHADOW_COLOR = 'rgba(0, 0, 0, 0.7)';
+var TEXT_COLOR = '#000';
+var FONT_HEIGHT = '16px PT Mono';
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -29,24 +33,31 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
+var getRandomNumber = function (min, max) {
+  Math.floor(Math.random() * (max - min) + min);
+};
+
 /*
-var getColorColumn = function (color) {
-  if (color[i] == 'Вы') {
-    ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-  } else {
-    ctx.fillStyle = 'rgba(0, 0, 255, 1';
+var titles = ['Ура вы победили!', 'Список результатов:'];
+
+var renderStatisticTitle = function (titles) {
+  ctx.fillStyle = TEXT_COLOR;
+  ctx.textBaseline = 'hanging';
+  ctx.font = FONT_HEIGHT;
+  for (var i = 0; i < titles.length; i++) {
+    ctx.fillText(titles[i], CLOUD_X + GAP, CLOUD_Y + GAP + (TEXT_HEIGHT + LINE_HEIGHT) * i);
   }
-  return ctx.fillStyle;
 };
 */
 
 window.renderStatistics = function (ctx, names, times) {
-  renderCloud(ctx, 110, 20, 'rgba(0, 0, 0, 0.7)');
-  renderCloud(ctx, 100, 10, '#fff');
+  renderCloud(ctx, CLOUD_X + 10, CLOUD_Y + 10, SHADOW_COLOR);
+  renderCloud(ctx, CLOUD_X, CLOUD_Y, CLOUD_COLOR);
 
-  ctx.fillStyle = '#000';
+  //renderStatisticTitle(titles);
+  ctx.fillStyle = TEXT_COLOR;
   ctx.textBaseline = 'hanging';
-  ctx.font = '16px PT Mono';
+  ctx.font = FONT_HEIGHT;
 
   ctx.fillText('Ура вы победили!', CLOUD_X + GAP, CLOUD_Y + GAP);
   ctx.fillText('Список результатов:', CLOUD_X + GAP, CLOUD_Y + GAP + TEXT_HEIGHT + LINE_HEIGHT);
@@ -56,8 +67,17 @@ window.renderStatistics = function (ctx, names, times) {
   for (var i = 0; i < names.length; i++) {
     ctx.fillStyle = '#000';
     ctx.fillText(names[i], CLOUD_X + COLUMN_WIDTH + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, PLAYERS_Y);
-    ctx.fillRect(CLOUD_X + COLUMN_WIDTH + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, COLUMN_Y, COLUMN_WIDTH, (columnHeight * times[i]) / maxTime);
-    // getColorColumn(names); не знаю каким образом менять цвета колонок
-    ctx.fillText(Math.ceil(times[i]), CLOUD_X + COLUMN_WIDTH + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, COLUMN_Y + (columnHeight * times[i]) / maxTime - TEXT_HEIGHT - LINE_HEIGHT);
+    ctx.fillText(Math.ceil(times[i]), CLOUD_X + COLUMN_WIDTH + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, COLUMN_Y + (COLUMN_HEIGHT * times[i]) / maxTime - TEXT_HEIGHT - LINE_HEIGHT);
+    if (names[i] == 'Вы') {
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+    } else {
+      ctx.fillStyle = 'rgba(0, 0, 255, 1)';
+    }
+    ctx.fillRect(CLOUD_X + COLUMN_WIDTH + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, COLUMN_Y, COLUMN_WIDTH, (COLUMN_HEIGHT * times[i]) / maxTime);
+
   }
 };
+
+
+
+
