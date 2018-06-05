@@ -38,12 +38,12 @@ var getMaxElement = function (arr) {
 // Функция создания заголовков модального окна
 var titles = ['Ура вы победили!', 'Список результатов:'];
 
-var renderStatisticTitle = function (ctx, titles) {
+var renderStatisticTitle = function (ctx, head) {
   ctx.fillStyle = TEXT_COLOR;
   ctx.textBaseline = 'hanging';
   ctx.font = FONT_HEIGHT;
-  for (var i = 0; i < titles.length; i++) {
-    ctx.fillText(titles[i], CLOUD_X + GAP, CLOUD_Y + GAP + (TEXT_HEIGHT + LINE_HEIGHT) * i);
+  for (var i = 0; i < head.length; i++) {
+    ctx.fillText(head[i], CLOUD_X + GAP, CLOUD_Y + GAP + (TEXT_HEIGHT + LINE_HEIGHT) * i);
   }
 };
 
@@ -54,7 +54,7 @@ var renderStatisticGistogram = function (ctx, names, times) {
     ctx.fillStyle = TEXT_COLOR;
     ctx.fillText(names[i], CLOUD_X + COLUMN_WIDTH + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, PLAYERS_Y);
     ctx.fillText(Math.ceil(times[i]), CLOUD_X + COLUMN_WIDTH + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, COLUMN_Y + (COLUMN_HEIGHT * times[i]) / maxTime - TEXT_HEIGHT - LINE_HEIGHT);
-    if (names[i] == 'Вы') {
+    if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
       ctx.fillStyle = 'rgba(0, 0, 255, ' + (Math.random() * (1 - 0) + 0) + ')';
