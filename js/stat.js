@@ -72,7 +72,3 @@ window.renderStatistics = function (ctx, names, times) {
 
   renderStatisticGistogram(ctx, names, times);
 };
-
-
-
-
