@@ -47,15 +47,9 @@ var renderStatisticTitle = function (ctx, titles) {
   }
 };
 
-window.renderStatistics = function (ctx, names, times) {
-
-  renderCloud(ctx, CLOUD_X + 10, CLOUD_Y + 10, SHADOW_COLOR);
-  renderCloud(ctx, CLOUD_X, CLOUD_Y, CLOUD_COLOR);
-
-  renderStatisticTitle(ctx, titles);
-
+// Функция создания гистограммы
+var renderStatisticGistogram = function (ctx, names, times) {
   var maxTime = getMaxElement(times);
-
   for (var i = 0; i < names.length; i++) {
     ctx.fillStyle = TEXT_COLOR;
     ctx.fillText(names[i], CLOUD_X + COLUMN_WIDTH + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, PLAYERS_Y);
@@ -67,6 +61,16 @@ window.renderStatistics = function (ctx, names, times) {
     }
     ctx.fillRect(CLOUD_X + COLUMN_WIDTH + (COLUMN_WIDTH + COLUMN_DISTANCE) * i, COLUMN_Y, COLUMN_WIDTH, (COLUMN_HEIGHT * times[i]) / maxTime);
   }
+};
+
+window.renderStatistics = function (ctx, names, times) {
+
+  renderCloud(ctx, CLOUD_X + 10, CLOUD_Y + 10, SHADOW_COLOR);
+  renderCloud(ctx, CLOUD_X, CLOUD_Y, CLOUD_COLOR);
+
+  renderStatisticTitle(ctx, titles);
+
+  renderStatisticGistogram(ctx, names, times);
 };
 
 
