@@ -26,22 +26,22 @@ var getRandomArrayElement = function (arr) {
 
 var wizards = [
   {
-    name: getRandomArrayElement(NAMES) + " " + getRandomArrayElement(SUR_NAMES),
+    name: getRandomArrayElement(NAMES) + ' ' + getRandomArrayElement(SUR_NAMES),
     coatColor: getRandomArrayElement(COAT_COLORS),
     eyesColor: getRandomArrayElement(EYES_COLORS)
   },
   {
-    name: getRandomArrayElement(NAMES) + " " + getRandomArrayElement(SUR_NAMES),
+    name: getRandomArrayElement(NAMES) + ' ' + getRandomArrayElement(SUR_NAMES),
     coatColor: getRandomArrayElement(COAT_COLORS),
     eyesColor: getRandomArrayElement(EYES_COLORS)
   },
   {
-    name: getRandomArrayElement(NAMES) + " " + getRandomArrayElement(SUR_NAMES),
+    name: getRandomArrayElement(NAMES) + ' ' + getRandomArrayElement(SUR_NAMES),
     coatColor: getRandomArrayElement(COAT_COLORS),
     eyesColor: getRandomArrayElement(EYES_COLORS)
   },
   {
-    name: getRandomArrayElement(NAMES) + " " + getRandomArrayElement(SUR_NAMES),
+    name: getRandomArrayElement(NAMES) + ' ' + getRandomArrayElement(SUR_NAMES),
     coatColor: getRandomArrayElement(COAT_COLORS),
     eyesColor: getRandomArrayElement(EYES_COLORS)
   }
