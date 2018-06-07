@@ -15,31 +15,30 @@ var COAT_COLORS = [
 ];
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
-var getRandomWizardName = function (numbers) {
+var getRandomNumber = function (numbers) {
   Math.floor(Math.random() * (numbers.length - numbers[0]) - numbers[0]);
 };
-console.log(getRandomWizardName(NAMES));
-/*
+
 var wizards = [
   {
-    name: ,
-    coatColor: ,
-    eyesColor:
+    name: getRandomNumber(NAMES) + getRandomNumber(SUR_NAMES),
+    coatColor: getRandomNumber(COAT_COLORS),
+    eyesColor: getRandomNumber(EYES_COLORS)
   },
   {
-    name: ,
-    coatColor: ,
-    eyesColor:
+    name: getRandomNumber(NAMES) + getRandomNumber(SUR_NAMES),
+    coatColor: getRandomNumber(COAT_COLORS),
+    eyesColor: getRandomNumber(EYES_COLORS)
   },
   {
-    name: ,
-    coatColor: ,
-    eyesColor:
+    name: getRandomNumber(NAMES) + getRandomNumber(SUR_NAMES),
+    coatColor: getRandomNumber(COAT_COLORS),
+    eyesColor: getRandomNumber(EYES_COLORS)
   },
   {
-    name: ,
-    coatColor: ,
-    eyesColor:
+    name: getRandomNumber(NAMES) + getRandomNumber(SUR_NAMES),
+    coatColor: getRandomNumber(COAT_COLORS),
+    eyesColor: getRandomNumber(EYES_COLORS)
   }
 ];
-*/
+
