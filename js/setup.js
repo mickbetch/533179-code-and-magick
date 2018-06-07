@@ -14,32 +14,57 @@ var COAT_COLORS = [
   'rgb(0, 0, 0)'
 ];
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
+
 // Функция создания случайного числа
-var getRandomNumber = function (numbers) {
-  numbers[Math.floor(Math.random() * (numbers.length - numbers[0]) - numbers[0])];
+var getRandomNumber = function (min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
-console.log(getRandomNumber(NAMES));
+// Функция создания случайного элемента массива
+var getRandomArrayElement = function (arr) {
+  return arr[getRandomNumber(0, arr.length - 1)];
+};
+
 var wizards = [
   {
-    name: getRandomNumber(NAMES) + getRandomNumber(SUR_NAMES),
-    coatColor: getRandomNumber(COAT_COLORS),
-    eyesColor: getRandomNumber(EYES_COLORS)
+    name: getRandomArrayElement(NAMES),
+    coatColor: getRandomArrayElement(COAT_COLORS),
+    eyesColor: getRandomArrayElement(EYES_COLORS)
   },
   {
-    name: getRandomNumber(NAMES) + getRandomNumber(SUR_NAMES),
-    coatColor: getRandomNumber(COAT_COLORS),
-    eyesColor: getRandomNumber(EYES_COLORS)
+    name: getRandomArrayElement(NAMES),
+    coatColor: getRandomArrayElement(COAT_COLORS),
+    eyesColor: getRandomArrayElement(EYES_COLORS)
   },
   {
-    name: getRandomNumber(NAMES) + getRandomNumber(SUR_NAMES),
-    coatColor: getRandomNumber(COAT_COLORS),
-    eyesColor: getRandomNumber(EYES_COLORS)
+    name: getRandomArrayElement(NAMES),
+    coatColor: getRandomArrayElement(COAT_COLORS),
+    eyesColor: getRandomArrayElement(EYES_COLORS)
   },
   {
-    name: getRandomNumber(NAMES) + getRandomNumber(SUR_NAMES),
-    coatColor: getRandomNumber(COAT_COLORS),
-    eyesColor: getRandomNumber(EYES_COLORS)
+    name: getRandomArrayElement(NAMES),
+    coatColor: getRandomArrayElement(COAT_COLORS),
+    eyesColor: getRandomArrayElement(EYES_COLORS)
   }
 ];
 
+var similarListElement = document.querySelector('.setup-similar-list');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+
+var renderWizard = function (wizard) {
+  var wizardElement = similarWizardTemplate.cloneNode(true);
+
+  wizardElement.querySelector('.setup-similar-label').textContent = wizards[i].name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizards[i].coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizards[i].eyesColor;
+
+  return wizardElement;
+};
+
+var fragment = document.createDocumentFragment();
+for (var i = 0; i < wizards.length; i++) {
+  fragment.appendChild(renderWizard(wizards[i]));
+}
+similarListElement.appendChild(fragment);
+
+// Чтобы отразить блок setup-similar с другими волшебниками убираю у него класс hidden
 document.querySelector('.setup-similar').classList.remove('hidden');
