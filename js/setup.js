@@ -26,22 +26,22 @@ var getRandomArrayElement = function (arr) {
 
 var wizards = [
   {
-    name: getRandomArrayElement(NAMES),
+    name: getRandomArrayElement(NAMES) + " " + getRandomArrayElement(SUR_NAMES),
     coatColor: getRandomArrayElement(COAT_COLORS),
     eyesColor: getRandomArrayElement(EYES_COLORS)
   },
   {
-    name: getRandomArrayElement(NAMES),
+    name: getRandomArrayElement(NAMES) + " " + getRandomArrayElement(SUR_NAMES),
     coatColor: getRandomArrayElement(COAT_COLORS),
     eyesColor: getRandomArrayElement(EYES_COLORS)
   },
   {
-    name: getRandomArrayElement(NAMES),
+    name: getRandomArrayElement(NAMES) + " " + getRandomArrayElement(SUR_NAMES),
     coatColor: getRandomArrayElement(COAT_COLORS),
     eyesColor: getRandomArrayElement(EYES_COLORS)
   },
   {
-    name: getRandomArrayElement(NAMES),
+    name: getRandomArrayElement(NAMES) + " " + getRandomArrayElement(SUR_NAMES),
     coatColor: getRandomArrayElement(COAT_COLORS),
     eyesColor: getRandomArrayElement(EYES_COLORS)
   }
@@ -53,9 +53,9 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template').c
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
-  wizardElement.querySelector('.setup-similar-label').textContent = wizards[i].name;
-  wizardElement.querySelector('.wizard-coat').style.fill = wizards[i].coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizards[i].eyesColor;
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
 
   return wizardElement;
 };
