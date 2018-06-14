@@ -73,41 +73,41 @@ var setup = document.querySelector('.setup');
 var setupClose = setup.querySelector('.setup-close');
 var userNameInput = setup.querySelector('.setup-user-name');
 
-var onPopupEscPress = function(evt) {
+var onPopupEscPress = function (evt) {
   if (userNameInput === document.activeElement) {
     return evt;
-  }   else {
+  } else {
     if (evt.keyCode === ESC_KEYCODE) {
-      closePopup();
+      return closePopup();
     }
   }
 };
 
-var openPopup = function() {
+var openPopup = function () {
   setup.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
 };
 
-var closePopup = function() {
+var closePopup = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
 };
 
-setupOpen.addEventListener('click', function() {
+setupOpen.addEventListener('click', function () {
   openPopup();
 });
 
-setupOpen.addEventListener('keydown', function(evt) {
+setupOpen.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     openPopup();
   }
 });
 
-setupClose.addEventListener('click', function() {
+setupClose.addEventListener('click', function () {
   closePopup();
 });
 
-setupClose.addEventListener('keydown', function(evt) {
+setupClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     closePopup();
   }
@@ -142,19 +142,19 @@ var setupWizardCoat = document.querySelector('.setup-wizard').querySelector('.wi
 var setupWizardEye = document.querySelector('.setup-wizard').querySelector('.wizard-eyes');
 var setupFireball = document.querySelector('.setup-fireball-wrap');
 
-setupWizardCoat.addEventListener('click', function() {
+setupWizardCoat.addEventListener('click', function () {
   var randomCoatColor = getRandomArrayElement(WIZARDS_COATCOLORS);
   setupWizardCoat.style = 'fill: ' + randomCoatColor + ';';
   setup.querySelector('.coat-color').value = randomCoatColor;
 });
 
-setupWizardEye.addEventListener('click', function() {
+setupWizardEye.addEventListener('click', function () {
   var randomEyesColor = getRandomArrayElement(WIZARDS_EYESCOLORS);
   setupWizardEye.style = 'fill: ' + randomEyesColor + ';';
   setup.querySelector('.eyes-color').value = randomEyesColor;
 });
 
-setupFireball.addEventListener('click', function() {
+setupFireball.addEventListener('click', function () {
   var randomFireballColor = getRandomArrayElement(FIREBALL_COLORS);
   setupFireball.style = 'background-color: ' + randomFireballColor + ';';
   setup.querySelector('.fireball-color').value = randomFireballColor;
