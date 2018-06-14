@@ -74,12 +74,8 @@ var setupClose = setup.querySelector('.setup-close');
 var userNameInput = setup.querySelector('.setup-user-name');
 
 var onPopupEscPress = function (evt) {
-  if (userNameInput === document.activeElement) {
-    return evt;
-  } else {
-    if (evt.keyCode === ESC_KEYCODE) {
-      return closePopup();
-    }
+  if (evt.keyCode === ESC_KEYCODE && userNameInput !== document.activeElement) {
+    closePopup();
   }
 };
 
