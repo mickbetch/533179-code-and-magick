@@ -13,6 +13,16 @@ var COAT_COLORS = [
 ];
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
+var SIMILAR_LIST_ELEMENT = document.querySelector('.setup-similar-list');
+
+var SIMILAR_WIZARD_TEMPLATE = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+
+var WIZARDS_COUNT = 4;
+
+var ESC_KEYCODE = 27;
+
+var ENTER_KEYCODE = 13;
+
 // Функция создания случайного числа
 var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -22,34 +32,24 @@ var getRandomArrayElement = function (arr) {
   return arr[getRandomNumber(0, arr.length - 1)];
 };
 
-var wizards = [
-  {
-    name: getRandomArrayElement(NAMES) + ' ' + getRandomArrayElement(SUR_NAMES),
-    coatColor: getRandomArrayElement(COAT_COLORS),
-    eyesColor: getRandomArrayElement(EYES_COLORS)
-  },
-  {
-    name: getRandomArrayElement(NAMES) + ' ' + getRandomArrayElement(SUR_NAMES),
-    coatColor: getRandomArrayElement(COAT_COLORS),
-    eyesColor: getRandomArrayElement(EYES_COLORS)
-  },
-  {
-    name: getRandomArrayElement(NAMES) + ' ' + getRandomArrayElement(SUR_NAMES),
-    coatColor: getRandomArrayElement(COAT_COLORS),
-    eyesColor: getRandomArrayElement(EYES_COLORS)
-  },
-  {
-    name: getRandomArrayElement(NAMES) + ' ' + getRandomArrayElement(SUR_NAMES),
-    coatColor: getRandomArrayElement(COAT_COLORS),
-    eyesColor: getRandomArrayElement(EYES_COLORS)
+var createArrayOfWizards = function (count) {
+  var wizards = [];
+  var wizard;
+  for (var i = 0; i < count; i++) {
+    wizard = {
+      name: getRandomArrayElement(NAMES) + ' ' + getRandomArrayElement(SUR_NAMES),
+      coatColor: getRandomArrayElement(COAT_COLORS),
+      eyesColor: getRandomArrayElement(EYES_COLORS)
+    };
+    wizards.push(wizard);
   }
-];
+  return wizards;
+};
 
-var similarListElement = document.querySelector('.setup-similar-list');
-var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+var WIZARDS = createArrayOfWizards(WIZARDS_COUNT);
 
 var renderWizard = function (wizard) {
-  var wizardElement = similarWizardTemplate.cloneNode(true);
+  var wizardElement = SIMILAR_WIZARD_TEMPLATE.cloneNode(true);
 
   wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
@@ -57,15 +57,15 @@ var renderWizard = function (wizard) {
 
   return wizardElement;
 };
+var renderWizards = function () {
+  var wirardFragment = document.createDocumentFragment();
+  for (var i = 0; i < WIZARDS.length; i++) {
+    wirardFragment.appendChild(renderWizard(WIZARDS[i]));
+  }
+  return wirardFragment;
+};
 
-var fragment = document.createDocumentFragment();
-for (var i = 0; i < wizards.length; i++) {
-  fragment.appendChild(renderWizard(wizards[i]));
-}
-similarListElement.appendChild(fragment);
-
-var ESC_KEYCODE = 27;
-var ENTER_KEYCODE = 13;
+SIMILAR_LIST_ELEMENT.appendChild(renderWizards());
 
 // Переменные для открытия и закрытия окна выбора персонажа
 var setupOpen = document.querySelector('.setup-open');
