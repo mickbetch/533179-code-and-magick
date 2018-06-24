@@ -11,6 +11,23 @@ var COAT_COLORS = [
   'rgb(215, 210, 55)',
   'rgb(0, 0, 0)'
 ];
+
+var WIZARDS_EYESCOLORS = [
+  'black',
+  'red',
+  'blue',
+  'yellow',
+  'green'
+];
+
+var FIREBALL_COLORS = [
+  '#ee4830',
+  '#30a8ee',
+  '#5ce6c0',
+  '#e848d5',
+  '#e6e848'
+];
+
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var SIMILAR_LIST_ELEMENT = document.querySelector('.setup-similar-list');
@@ -22,6 +39,19 @@ var WIZARDS_COUNT = 4;
 var ESC_KEYCODE = 27;
 
 var ENTER_KEYCODE = 13;
+
+// Переменные для открытия и закрытия окна выбора персонажа
+var SETUP_OPEN = document.querySelector('.setup-open');
+
+var SETUP = document.querySelector('.setup');
+
+var SETUP_CLOSE = SETUP.querySelector('.setup-close');
+
+var USER_NAME_INPUT = SETUP.querySelector('.setup-user-name');
+
+var SETUP_WIZARD_COAT = document.querySelector('.setup-wizard').querySelector('.wizard-coat');
+var SETUP_WIZARD_EYE = document.querySelector('.setup-wizard').querySelector('.wizard-eyes');
+var SETUP_FIREBALL = document.querySelector('.setup-fireball-wrap');
 
 // Функция создания случайного числа
 var getRandomNumber = function (min, max) {
@@ -67,92 +97,73 @@ var renderWizards = function () {
 
 SIMILAR_LIST_ELEMENT.appendChild(renderWizards());
 
-// Переменные для открытия и закрытия окна выбора персонажа
-var setupOpen = document.querySelector('.setup-open');
-var setup = document.querySelector('.setup');
-var setupClose = setup.querySelector('.setup-close');
-var userNameInput = setup.querySelector('.setup-user-name');
-
 var onPopupEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE && userNameInput !== document.activeElement) {
+  if (evt.keyCode === ESC_KEYCODE && USER_NAME_INPUT !== document.activeElement) {
     closePopup();
   }
 };
 
 var openPopup = function () {
-  setup.classList.remove('hidden');
+  SETUP.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
 };
 
 var closePopup = function () {
-  setup.classList.add('hidden');
+  SETUP.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
 };
 
-setupOpen.addEventListener('click', function () {
-  openPopup();
-});
+var onUserNameInvalid = function (evt) {
+  if (evt.target.validity.tooShort) {
+    evt.target.setCustomValidity('Поле должно содержать минимум 2 символа');
+  } else if (evt.target.validity.tooLong) {
+    evt.target.setCustomValidity('Поле должно содержать не более 25 символов');
+  } else {
+    evt.target.setCustomValidity('');
+  }
+};
 
-setupOpen.addEventListener('keydown', function (evt) {
+var onUserNameInput = function (evt) {
+  if (evt.target.value.length < 2) {
+    evt.target.setCustomValidity('Поле должно содержать минимум 2 символа');
+  } else {
+    evt.target.setCustomValidity('');
+  }
+};
+
+SETUP_OPEN.addEventListener('click', openPopup);
+
+SETUP_OPEN.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     openPopup();
   }
 });
 
-setupClose.addEventListener('click', function () {
-  closePopup();
-});
+SETUP_CLOSE.addEventListener('click', closePopup);
 
-setupClose.addEventListener('keydown', function (evt) {
+SETUP_CLOSE.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     closePopup();
   }
 });
 
-var WIZARDS_COATCOLORS = [
-  'rgb(101, 137, 164)',
-  'rgb(241, 43, 107)',
-  'rgb(146, 100, 161)',
-  'rgb(56, 159, 117)',
-  'rgb(215, 210, 55)',
-  'rgb(0, 0, 0)'
-];
-
-var WIZARDS_EYESCOLORS = [
-  'black',
-  'red',
-  'blue',
-  'yellow',
-  'green'
-];
-
-var FIREBALL_COLORS = [
-  '#ee4830',
-  '#30a8ee',
-  '#5ce6c0',
-  '#e848d5',
-  '#e6e848'
-];
-
-var setupWizardCoat = document.querySelector('.setup-wizard').querySelector('.wizard-coat');
-var setupWizardEye = document.querySelector('.setup-wizard').querySelector('.wizard-eyes');
-var setupFireball = document.querySelector('.setup-fireball-wrap');
-
-setupWizardCoat.addEventListener('click', function () {
-  var randomCoatColor = getRandomArrayElement(WIZARDS_COATCOLORS);
-  setupWizardCoat.style = 'fill: ' + randomCoatColor + ';';
-  setup.querySelector('.coat-color').value = randomCoatColor;
+SETUP_WIZARD_COAT.addEventListener('click', function (evt) {
+  var randomCoatColor = getRandomArrayElement(COAT_COLORS);
+  evt.target.style = 'fill: ' + randomCoatColor + ';';
+  SETUP.querySelector('.coat-color').value = randomCoatColor;
 });
 
-setupWizardEye.addEventListener('click', function () {
+SETUP_WIZARD_EYE.addEventListener('click', function (evt) {
   var randomEyesColor = getRandomArrayElement(WIZARDS_EYESCOLORS);
-  setupWizardEye.style = 'fill: ' + randomEyesColor + ';';
-  setup.querySelector('.eyes-color').value = randomEyesColor;
+  evt.target.style = 'fill: ' + randomEyesColor + ';';
+  SETUP.querySelector('.eyes-color').value = randomEyesColor;
 });
 
-setupFireball.addEventListener('click', function () {
+SETUP_FIREBALL.addEventListener('click', function (evt) {
   var randomFireballColor = getRandomArrayElement(FIREBALL_COLORS);
-  setupFireball.style = 'background-color: ' + randomFireballColor + ';';
-  setup.querySelector('.fireball-color').value = randomFireballColor;
+  evt.target.style = 'background-color: ' + randomFireballColor + ';';
+  SETUP.querySelector('.fireball-color').value = randomFireballColor;
 });
 
+USER_NAME_INPUT.addEventListener('invalid', onUserNameInvalid);
+USER_NAME_INPUT.addEventListener('input', onUserNameInput);
